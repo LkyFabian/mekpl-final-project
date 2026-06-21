@@ -42,7 +42,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       # Perintah ini menjalankan compile, unit test, dan inspeksi SonarCloud sekaligus
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Ikyfabian_mekpl-final-project
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Lkyfabian_mekpl-final-project
 
   # TUGAS PARTNER LU: Continuous Deployment/Delivery
   deploy:
