@@ -33,5 +33,6 @@ public class CalculatorTest {
             calc.divide(1, 0);
         });
         assertEquals("Pembagian dengan nol tidak diizinkan!", exception.getMessage());
+        // pancingan untuk memicu maven surefire
     }
 }
