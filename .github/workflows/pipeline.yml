@@ -43,7 +43,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=LkyFabian_mekpl-final-project
 
-  # Continuous Deployment/Delivery
+  # Continuous Deployment/Delivery (GitHub Packages)
   deploy:
     needs: build-test-inspect
     runs-on: ubuntu-latest
@@ -52,14 +52,21 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Setup Java
+    # REVISI 1: Nambahin settingan server-id dan otentikasi
+    - name: Setup Java and Maven for GitHub Packages
       uses: actions/setup-java@v4
       with:
         distribution: temurin
         java-version: '17'
+        server-id: github
+        server-username: GITHUB_ACTOR
+        server-password: GITHUB_TOKEN
 
-    - name: Package
-      run: mvn package
+    # REVISI 2: Mengubah perintah package menjadi deploy
+    - name: Deploy to GitHub Packages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: mvn deploy -DskipTests
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
